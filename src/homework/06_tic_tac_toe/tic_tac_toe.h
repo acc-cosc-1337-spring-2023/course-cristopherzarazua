@@ -12,18 +12,17 @@ class TicTacToe
 {
 public:
     bool game_over();
-    virtual void start_game(string first_palyer);
+    void start_game(string first_player);
     void mark_board(int position);
     void display_board() const;
     string get_player() const;
 
 private: 
+    string player;
+    vector<string> pegs{9, " "};
     void set_next_player();
     bool check_board_full();
     void clear_board();
-    
-    string player;
-    vector<string> pegs{9, " "};
 };
 
 

@@ -1,47 +1,20 @@
 //cpp
 #include<iostream>
 #include "tic_tac_toe.h"
+#include<vector>
+#include<string>
 
 using std::string; using std::cout; using std:: cin;
 
 bool TicTacToe::game_over()
 {
-    bool condition = false;
-
-    condition = check_board_full();
-    if(condition == true)
-    {
-        cout<<"Game Over\n";
-    }
-
-    return condition;
+    return check_board_full();
 }
 
 void TicTacToe::start_game(string first_player)
 {
-    if(first_player == "X" || first_player == "x")
-    {
-        player = first_player;
-    }
-    else if (first_player == "O" || first_player == "o")
-    {
-        player = first_player;
-    }
-    else
-    {
-        cout<<"Invalid letter";
-    }
+    player = first_player;
     clear_board();
-
-    int position;
-
-    while(!game_over())
-	{
-		cout<<"Enter position from 1 to 9: ";
-        cin>>position;
-        mark_board(position);
-	}
-
 }
 
 void TicTacToe::mark_board(int position)
