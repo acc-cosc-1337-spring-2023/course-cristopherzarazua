@@ -23,7 +23,9 @@ int main()
 		if (game.game_over())
 		{
 
-			cout << "Game over!\n";
+			cout <<"Game over!\n";
+			cout<<"The winner is: " <<game.get_winner()<< "\n";
+			
 			string continue_playing;
 			cout << "Continue playing? Enter Y or N: ";
 			cin >> continue_playing;

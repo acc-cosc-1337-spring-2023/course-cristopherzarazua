@@ -28,3 +28,104 @@ TEST_CASE("Test game over if 9 slots are selected") {
     game.mark_board(8);
     REQUIRE(game.game_over() == true);
 }
+
+TEST_CASE("Test win by first column")
+{
+	TicTacToe game;
+	game.start_game("X");
+	game.mark_board(1);
+	game.mark_board(2);
+	game.mark_board(4);
+	game.mark_board(5);
+	game.mark_board(7);
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Test win by second column")
+{
+	TicTacToe game;
+	game.start_game("X");
+	game.mark_board(2);
+	game.mark_board(1);
+	game.mark_board(5);
+	game.mark_board(4);
+	game.mark_board(8);
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Test win by third column")
+{
+	TicTacToe game;
+	game.start_game("X");
+	game.mark_board(3);
+	game.mark_board(1);
+	game.mark_board(6);
+	game.mark_board(4);
+	game.mark_board(9);
+
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Test win by first row")
+{
+	TicTacToe game;
+	game.start_game("X");
+	game.mark_board(1);
+	game.mark_board(4); //0 position other
+	game.mark_board(2);
+	game.mark_board(5); //0 position other
+	game.mark_board(3);
+
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Test win by second row")
+{
+	TicTacToe game;
+	game.start_game("X");
+	game.mark_board(4);
+	game.mark_board(1); //0 position other
+	game.mark_board(5);
+	game.mark_board(2); //0 position other
+	game.mark_board(6);
+
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Test win by third row")
+{
+	TicTacToe game;
+	game.start_game("X");
+	game.mark_board(7);
+	game.mark_board(1); //0 position other
+	game.mark_board(8);
+	game.mark_board(2); //0 position other
+	game.mark_board(9);
+
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Test win diagonally from top left")
+{
+	TicTacToe game;
+	game.start_game("X");
+	game.mark_board(1);
+	game.mark_board(2); //0 position other
+	game.mark_board(5);
+	game.mark_board(4); //0 position other
+	game.mark_board(9);
+	REQUIRE(game.game_over() == true);
+}
+
+TEST_CASE("Test win diagonally from top right")
+{
+	TicTacToe game;
+	game.start_game("X");
+	game.mark_board(3);
+	game.mark_board(2); //0 position other
+	game.mark_board(5);
+	game.mark_board(4); //0 position other
+	game.mark_board(7);
+
+	REQUIRE(game.game_over() == true);
+}
