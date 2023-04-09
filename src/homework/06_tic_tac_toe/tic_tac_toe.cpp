@@ -88,7 +88,7 @@ void TicTacToe::mark_board(int position)
 {
     auto mark = position - 1;
     pegs[mark] = player;
-    display_board();
+    //display_board();
     set_next_player();
 }
 
