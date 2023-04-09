@@ -134,7 +134,7 @@ string TicTacToe::get_player() const
     return player;
 }
 
-void TicTacToe::display_board() const
+/*void TicTacToe::display_board() const
 {
     for (int i = 0; i < 9; i += 3) 
     {
@@ -145,7 +145,7 @@ void TicTacToe::display_board() const
             cout << "\n";
         }
     }
-}
+}*/
 
 void TicTacToe::set_winner()
 {
@@ -166,4 +166,23 @@ void TicTacToe::set_winner()
 string TicTacToe::get_winner() const
 {
     return winner;
+}
+
+std::ostream &operator<<(std::ostream &out, const TicTacToe &game)
+{
+    for (int i = 0; i < 9; i += 3)
+    {
+        out << game.pegs[i] << "|" << game.pegs[i + 1] << "|" << game.pegs[i + 2]
+            << "\n";
+    }
+    return out;
+}
+
+std::istream &operator>>(std::istream &in, TicTacToe &game)
+{
+    int position;
+    cout << "Enter position 1-9: ";
+    in >> position;
+    game.mark_board(position);
+    return in;
 }
