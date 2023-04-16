@@ -1,48 +1,55 @@
-#include<iostream>
-#include<string>
-#include"tic_tac_toe.h"
-#include"tic_tac_toe_manager.h"
+#include "tic_tac_toe_manager.h"
+#include "tic_tac_toe_3.h"
+#include "tic_tac_toe_4.h"
+#include "tic_tac_toe.h"
+#include <iostream>
+#include <memory>
 
-using std::string; using std::cout; using std::cin;
+using std::cin;
+using std::cout;
+using std::make_unique;
+using std::unique_ptr;
 
-int main() 
+int main()
 {
-	TicTacToe game;
-	TicTacToeManager manager;
-	string player;
+    TicTacToeManager manager; // instance of TicTacToeManager to manage the games
+    char choice;              // variable to store user choice to play again or not
+    do
+    {
+        unique_ptr<TicTacToe> game; // variable to store the game
+        string player;
+        int game_version;
+        cout << "Enter board size (3 or 4): ";
+        cin >> game_version;
 
-	cout<<"Select X or O: ";
-    cin>>player;
-	game.start_game(player);
-	bool continue_game = true;
-	while (continue_game)
-	{
-		//int position;
-		cout << game;
-		cin >> game;
-	
-		//game.mark_board(position);
-		if (game.game_over())
-		{
+        if (game_version == 3)
+        {
+            game = make_unique<TicTacToe3>();
+        }
+        else if (game_version == 4)
+        {
+            game = make_unique<TicTacToe4>();
+        }
 
-			cout <<"Game over!\n";
-			cout<<"The winner is: " <<game.get_winner()<< "\n";
-			manager.save_game(game);
-			int x, o, c;
-			manager.get_winner_total(x, o, c);
-			cout << "\nX wins: " << x << "\n";
-			cout << "O wins: " << o << "\n";
-			cout << "Ties: " << c << "\n\n";
-			
-			string continue_playing;
-			cout << "Continue playing? Enter Y or N: ";
-			cin >> continue_playing;
-			if (continue_playing == "N" || continue_playing == "n")
-			{
-				continue_game = false;
-			}
-			string first_player;
-			game.start_game(player);
-		}
-	}
+        cout << "Enter X or O: ";
+        cin >> player;
+        if (player == "q" || player == "Q")
+        {
+            break;
+        }
+        game->start_game(player);
+        cout << *game;
+        while (!game->game_over())
+        {
+            cin >> *game;
+            cout << *game;
+        }
+        manager.save_game(game);
+        cout << "Do you want to play again? (Y/N): ";
+        cin >> choice;
+    } while (choice == 'Y' || choice == 'y');
+    cout << manager;
+    cout << "Thanks for playing my TicTacToe!"
+         << "\n";
+    return 0;
 }

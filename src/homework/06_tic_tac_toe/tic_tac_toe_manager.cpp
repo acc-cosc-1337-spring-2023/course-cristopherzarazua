@@ -2,60 +2,58 @@
 #include "tic_tac_toe.h"
 #include "tic_tac_toe_manager.h"
 #include <iostream>
+#include <memory>
 
-using std::cout; using std::cin; using std::string; 
+using std::move;
 
-void TicTacToeManager::get_winner_total(int& x, int& o, int& c)
+void TicTacToeManager::get_winner_total(int &x, int &o, int &c)
 {
+    //Use references to get the winners
     x = x_win;
     o = o_win;
     c = ties;
 }
 
-void TicTacToeManager::save_game(TicTacToe game)
+void TicTacToeManager::save_game(unique_ptr<TicTacToe> &game)
 {
-    games.push_back(game); 
-    string winner = game.get_winner(); 
-    if (winner == "X") 
-    {
-        x_win++; 
-                cout << "X wins!" << "\n";
-    } else if (winner == "O")
-    {
-        o_win++; 
-                cout << "O wins!" << "\n" ;
-    } else 
-    {
-        ties++;
-                cout << "C wins!" << "\n";
-    }
-}
+    //update the winner count
+    update_winner_count(game->get_winner());
+    //push the game into the games vector
+    string winner = game->get_winner(); // get the winner of the game
 
-void TicTacToeManager::update_winner_count(string winner)
-{
-    
+    games.push_back(move(game));
     if (winner == "X")
     {
-        x_win++;
+        std::cout << "X wins!"
+                  << "\n";
     }
     else if (winner == "O")
     {
-        o_win++;
+        std::cout << "O wins!"
+                  << "\n";
     }
     else
     {
-        ties++;
+        std::cout << "Tie!"
+                  << "\n";
     }
 }
+void TicTacToeManager::update_winner_count(string winner)
+{
+}
 
-std::ostream& operator<<(std::ostream& os, TicTacToeManager manager)
-{    
-    for (const auto& game : manager.games)
+std::ostream &operator<<(std::ostream &os, TicTacToeManager &manager)
+{ //loop through the games vector and display each game
+    for (auto &game : manager.games)
     {
-        os<<game<< "\n";
+        if (game)
+        {
+            os << *game << "\n";
+        }
     }
-    os<< "X wins: " <<manager.x_win<< "\n";
-    os<< "O wins: " <<manager.o_win<< "\n";
-    os<< "Ties: " <<manager.ties<< "\n";
+    //display the winner totals
+    os << "X wins: " << manager.x_win << "\n";
+    os << "O wins: " << manager.o_win << "\n";
+    os << "Ties: " << manager.ties << "\n";
     return os;
 }
