@@ -143,3 +143,9 @@ std::istream &operator>>(std::istream &in, TicTacToe &game)
     game.mark_board(position);
     return in;
 }
+
+TicTacToe::TicTacToe(std::vector<std::string> p, string win) : pegs{p}, winner{win} {}
+const std::vector<std::string>& TicTacToe::get_pegs() const 
+{
+    return pegs;
+}

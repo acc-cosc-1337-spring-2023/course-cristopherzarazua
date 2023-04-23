@@ -1,6 +1,12 @@
+#include "tic_tac_toe.h"
 #include "tic_tac_toe_3.h"
+#include "tic_tac_toe_manager.h"
+#include <iostream>
+#include <string>
+#include <memory>
+#include <vector>
 
-
+using std::string; using std::cout; using std::vector;
 /*
 class function check_column_win
 Win by column if and return true if

@@ -13,8 +13,8 @@ using std::vector;
 class TicTacToe3 : public TicTacToe
 {
 public:
-    //default constructor
-    TicTacToe3() : TicTacToe(3) {}
+    TicTacToe3() : TicTacToe(3){};
+    TicTacToe3(std::vector<string> p, string winner) : TicTacToe(p, winner){};
 
 private:
     bool check_column_win() override;

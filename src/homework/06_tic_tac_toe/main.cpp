@@ -12,7 +12,8 @@ using std::unique_ptr;
 
 int main()
 {
-    TicTacToeManager manager; // instance of TicTacToeManager to manage the games
+    TicTacToeData data;
+	TicTacToeManager manager(data); // instance of TicTacToeManager to manage the games
     char choice;              // variable to store user choice to play again or not
     do
     {
@@ -49,7 +50,5 @@ int main()
         cin >> choice;
     } while (choice == 'Y' || choice == 'y');
     cout << manager;
-    cout << "Thanks for playing my TicTacToe!"
-         << "\n";
     return 0;
 }
